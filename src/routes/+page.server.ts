@@ -1,7 +1,6 @@
 import type { PageServerLoad } from './$types';
 
 import { error } from '@sveltejs/kit';
-import { createClient } from 'pexels';
 import { PEXELS_API_KEY, UNSPLASH_ACCESS_KEY } from '$env/static/private';
 import { createApi } from 'unsplash-js';
 
