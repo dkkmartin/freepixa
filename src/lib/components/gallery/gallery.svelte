@@ -12,12 +12,7 @@
 <div class="flex flex-col gap-4">
 	<div>
 		<h1 class="roboto-condensed pl-2 text-sm">Nature</h1>
-		<Carousel.Root
-			class="border-b border-t p-2"
-			dir="rtl"
-			plugins={[plugin1]}
-			opts={{ ...opts, direction: 'rtl' }}
-		>
+		<Carousel.Root class="border-b border-t p-2" plugins={[plugin1]} {opts}>
 			<Carousel.Content>
 				<Carousel.Item class="carousel-item basis-1/3"
 					><enhanced:img
@@ -255,7 +250,12 @@
 
 	<div>
 		<h1 class="roboto-condensed pl-2 text-sm">Animals</h1>
-		<Carousel.Root class="border-b border-t p-2" plugins={[plugin3]} {opts}>
+		<Carousel.Root
+			dir="rtl"
+			class="border-b border-t p-2"
+			plugins={[plugin3]}
+			opts={{ ...opts, direction: 'rtl' }}
+		>
 			<Carousel.Content>
 				<Carousel.Item class="carousel-item basis-1/3"
 					><enhanced:img
