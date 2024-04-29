@@ -1,9 +1,5 @@
 import type { PageServerLoad } from './$types';
 
-import { error } from '@sveltejs/kit';
-import { PEXELS_API_KEY, UNSPLASH_ACCESS_KEY } from '$env/static/private';
-import { createApi } from 'unsplash-js';
-
 export const load: PageServerLoad = async () => {
 	// const client = createClient(PEXELS_API_KEY);
 	// const query = 'Nature';

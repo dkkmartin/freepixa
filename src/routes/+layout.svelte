@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Header from '$lib/components/header/header.svelte';
 	import '../app.pcss';
 	import { ModeWatcher } from 'mode-watcher';
 </script>
@@ -12,7 +13,8 @@
 	/>
 </svelte:head>
 
-<main class="h-screen">
-	<ModeWatcher />
-	<slot></slot>
-</main>
+<ModeWatcher />
+<nav>
+	<Header></Header>
+</nav>
+<slot></slot>

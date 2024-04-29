@@ -9,7 +9,7 @@
 	const plugin3 = Autoscroll({ speed: 0.5, stopOnInteraction: false, stopOnMouseEnter: true });
 </script>
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4 pt-4">
 	<div>
 		<h1 class="roboto-condensed pl-2 text-sm">Nature</h1>
 		<Carousel.Root class="border-b border-t p-2" plugins={[plugin1]} {opts}>
