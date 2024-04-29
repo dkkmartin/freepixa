@@ -14,6 +14,7 @@ export async function load({ params }) {
 		const data = await unsplash.search.getPhotos({ query: params.slug, page: 1, perPage: 20 });
 		if (data.type === 'success') {
 			return {
+				params: params.slug,
 				data: serializeNonPOJOs(data)
 			};
 		}

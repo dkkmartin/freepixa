@@ -17,4 +17,6 @@
 <nav>
 	<Header></Header>
 </nav>
-<slot></slot>
+<main>
+	<slot></slot>
+</main>

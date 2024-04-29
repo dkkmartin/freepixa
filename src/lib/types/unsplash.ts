@@ -1,4 +1,5 @@
 export interface UnsplashData {
+	params: string;
 	data: Data;
 }
 
