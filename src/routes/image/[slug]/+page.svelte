@@ -37,10 +37,12 @@
 					<b>{data.user.name}</b>
 				</div>
 			</a>
-			<div class="flex items-center gap-2">
-				<Location></Location>
-				<p class="text-sm text-muted-foreground">{data.user.location}</p>
-			</div>
+			{#if data.user.location}
+				<div class="flex items-center gap-2">
+					<Location></Location>
+					<p class="text-sm text-muted-foreground">{data.user.location}</p>
+				</div>
+			{/if}
 		</div>
 		<Image layout="fullWidth" src={data.urls.small} alt={data.alt_description} />
 		<div class="flex items-center justify-between px-2">

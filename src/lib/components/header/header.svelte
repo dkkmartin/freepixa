@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	import Search from '../svg/search.svelte';
 	import { Button } from '../ui/button';
 	import ThemeToggler from './themeToggler.svelte';
@@ -7,10 +8,16 @@
 
 	let clicked: boolean = false;
 	let inputElement: HTMLElement;
+	let searchTerm: string;
 
-	const handleSearch = async () => {
+	const focusSearch = async () => {
 		await new Promise((res) => setTimeout(res, 500));
 		inputElement?.focus();
+	};
+
+	const handleSearch = (e: Event) => {
+		e.preventDefault();
+		goto('/search/' + searchTerm);
 	};
 
 	const searchAnimationOpen = () => {
@@ -39,7 +46,7 @@
 					if (!clicked) {
 						searchAnimationOpen();
 						clicked = true;
-						handleSearch();
+						focusSearch();
 					} else {
 						searchAnimationClose();
 						clicked = false;
@@ -48,13 +55,16 @@
 			>
 				<Search class="size-5"></Search>
 			</Button>
-			<input
-				id="search-input"
-				bind:this={inputElement}
-				type="search"
-				placeholder="Search"
-				class="border-none {clicked ? '' : 'hidden'}"
-			/>
+			<form on:submit={handleSearch}>
+				<input
+					id="search-input"
+					bind:this={inputElement}
+					bind:value={searchTerm}
+					type="search"
+					placeholder="Search"
+					class="border-none {clicked ? '' : 'hidden'}"
+				/>
+			</form>
 		</div>
 		<ThemeToggler></ThemeToggler>
 	</div>
