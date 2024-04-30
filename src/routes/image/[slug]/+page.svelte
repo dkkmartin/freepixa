@@ -6,6 +6,7 @@
 	import { imageDataStore } from '$lib/stores/stores';
 	import Location from '$lib/components/svg/MaterialSymbolsLocationOn.svelte';
 	import Calendar from '$lib/components/svg/MaterialSymbolsLightCalendarTodayOutline.svelte';
+	import Heart from '$lib/components/svg/MaterialSymbolsFavoriteOutline.svelte';
 	import { type Result } from '$lib/types/unsplash';
 
 	let data: Result;
@@ -46,6 +47,12 @@
 			{/if}
 		</div>
 		<Image layout="fullWidth" src={data.urls.small} alt={data.alt_description} />
+		<div class="flex items-center justify-between border-b p-2">
+			<p class="text-xl text-muted-foreground">{data.description}</p>
+			<Button variant="ghost" size="icon">
+				<Heart class="h-[1.5rem] w-[1.5rem]"></Heart>
+			</Button>
+		</div>
 		<div class="flex items-center justify-between px-2">
 			<small class="text-sm font-medium leading-none">Likes: {data.likes}</small>
 			<div class="flex items-center gap-2">
