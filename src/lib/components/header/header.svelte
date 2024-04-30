@@ -35,7 +35,9 @@
 </script>
 
 <header class="flex items-center justify-between border-b p-2 shadow-sm">
-	<h1 class="heading-title text-5xl">FreePixa</h1>
+	<a href="/">
+		<h1 class="heading-title text-5xl">FreePixa</h1>
+	</a>
 	<div class="flex items-center gap-3">
 		<div class="search-button flex h-9 w-9 items-center rounded-[calc(var(--radius)-2px)] border">
 			<Button

@@ -15,7 +15,7 @@
 	let capitalized = data.params.charAt(0).toUpperCase();
 	let imageLoaded: { [key: string]: boolean } = {};
 	let pageNumber: number = 1;
-	let images = [];
+	let images: any = [];
 	let combined = [...results, ...(images || [])];
 
 	function handleImageLoad(imageId: string) {
@@ -23,7 +23,8 @@
 	}
 
 	function handleClick(imageId: string) {
-		const selectedImage = results.find((image) => image.id === imageId);
+		const allImages = [...results, ...images];
+		const selectedImage = allImages.find((image) => image.id === imageId);
 		imageDataStore.set(selectedImage);
 	}
 
@@ -57,7 +58,7 @@
 			}
 
 			const jsonData = await response.json();
-			images = jsonData;
+			images = [...images, ...jsonData];
 			console.log(images);
 
 			isLoading = false;
@@ -79,8 +80,8 @@
 <section
 	class="flex flex-col gap-4 py-4"
 	use:infiniteScrollAction={{
-		delay: 1000,
-		distance: 0,
+		delay: 500,
+		distance: 100,
 		cb: loadItems
 	}}
 >
