@@ -6,7 +6,6 @@
 	import { Skeleton } from '$lib/components/ui/skeleton';
 	import SvgSpinners3DotsMove from '$lib/components/svg/SvgSpinners3DotsMove.svelte';
 	import { infiniteScrollAction } from 'svelte-legos';
-	import { goto } from '$app/navigation';
 	import { blurhashToCssGradientString } from '@unpic/placeholder';
 
 	export let data: UnsplashData;
@@ -16,6 +15,8 @@
 	let capitalized = data.params.charAt(0).toUpperCase();
 	let imageLoaded: { [key: string]: boolean } = {};
 	let pageNumber: number = 1;
+	let images = [];
+	let combined = [...results, ...(images || [])];
 
 	function handleImageLoad(imageId: string) {
 		imageLoaded[imageId] = true;
@@ -31,27 +32,45 @@
 		return placeholder;
 	}
 
-	function handlePage() {
-		// Create a new URLSearchParams object
-		let params = new URLSearchParams(window.location.search);
-		// Set the 'page' parameter to the new page number
-		params.set('page', String(pageNumber));
-		// Navigate to the new URL
-		goto('?' + params.toString());
-	}
-
-	function loadItems() {
-		if (!isLoading) return;
+	async function loadItems() {
+		if (isLoading) return;
 		isLoading = true;
-		pageNumber += 1;
-		handlePage();
-		console.log(pageNumber);
-		isLoading = false;
+
+		try {
+			const response = await fetch('/api/get-images', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					query: data.params,
+					page: pageNumber + 1
+				})
+			});
+
+			if (response.ok) {
+				pageNumber += 1;
+			}
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
+			const jsonData = await response.json();
+			images = jsonData;
+			console.log(images);
+
+			isLoading = false;
+		} catch (error) {
+			console.error('Error:', error);
+			isLoading = false;
+		}
 	}
 
 	$: {
 		results = data.data.response.results;
 		capitalized = data.params.charAt(0).toUpperCase();
+		combined = [...results, ...images];
 	}
 </script>
 
@@ -60,12 +79,12 @@
 <section
 	class="flex flex-col gap-4 py-4"
 	use:infiniteScrollAction={{
-		delay: 200,
+		delay: 1000,
 		distance: 0,
 		cb: loadItems
 	}}
 >
-	{#each results as imageObject (imageObject.id)}
+	{#each combined as imageObject (imageObject.id)}
 		<div class="flex flex-col gap-2">
 			<div class="flex items-center gap-2 px-2">
 				<Avatar.Root>
@@ -102,7 +121,9 @@
 		</div>
 	{/each}
 	{#if isLoading}
-		<SvgSpinners3DotsMove></SvgSpinners3DotsMove>
+		<div class="flex justify-center py-4">
+			<SvgSpinners3DotsMove class="size-10"></SvgSpinners3DotsMove>
+		</div>
 	{/if}
 </section>
 
