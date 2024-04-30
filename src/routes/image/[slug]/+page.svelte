@@ -9,6 +9,7 @@
 	import { type Result } from '$lib/types/unsplash';
 
 	let data: Result;
+
 	$: {
 		data = $imageDataStore as Result;
 		console.log(data);
@@ -63,7 +64,7 @@
 			</a>
 		{/each}
 	</div>
-	<a target="_blank" rel="noopener noreferrer" aria-label="Download" href={data.links.download}
+	<a target="_blank" rel="noopener noreferrer" aria-label="Download" href={data.urls.full}
 		><Button>Download</Button></a
 	>
 </section>
