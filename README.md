@@ -16,4 +16,4 @@ A image searcher using Unsplash API, made with Sveltekit.
 
 ## Demo
 
-[https://freepixa-project.netlify.app/](Demo)
+[Demo](https://freepixa-project.netlify.app/)
