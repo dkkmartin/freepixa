@@ -42,7 +42,7 @@
 		"@macfja/svelte-persistent-store": "^2.4.1",
 		"@unpic/placeholder": "^0.1.2",
 		"@unpic/svelte": "^0.0.53",
-		"bits-ui": "^0.21.5",
+		"bits-ui": "^0.21.7",
 		"clsx": "^2.1.1",
 		"embla-carousel-auto-scroll": "^8.0.2",
 		"embla-carousel-autoplay": "^8.0.2",
