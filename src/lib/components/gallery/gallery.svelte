@@ -8,7 +8,7 @@
 	const plugin2 = Autoscroll({ speed: 0.5, stopOnInteraction: false, stopOnMouseEnter: true });
 	const plugin3 = Autoscroll({ speed: 0.5, stopOnInteraction: false, stopOnMouseEnter: true });
 
-	const quality = 20;
+	const quality = 10;
 </script>
 
 <div class="flex flex-col gap-4 pt-4">
