@@ -5,7 +5,7 @@
 	import Moon from '../svg/moon.svelte';
 </script>
 
-<Button on:click={toggleMode} variant="outline" size="icon">
+<Button aria-label="Toggle theme" on:click={toggleMode} variant="outline" size="icon">
 	<Sun
 		class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
 	/>
