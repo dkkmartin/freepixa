@@ -9,7 +9,6 @@ export async function POST({ request }) {
 	});
 
 	try {
-		console.log('Fetching data with QUERY: ' + query + ' and PAGE: ' + page);
 		const data = await unsplash.search.getPhotos({
 			query: query,
 			page: page,

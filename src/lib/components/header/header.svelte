@@ -41,6 +41,7 @@
 	<div class="flex items-center gap-3">
 		<div class="search-button flex h-9 w-9 items-center rounded-[calc(var(--radius)-2px)] border">
 			<Button
+				aria-label="Search"
 				variant="ghost"
 				size="icon"
 				class="relative -top-[1px] min-w-9"
