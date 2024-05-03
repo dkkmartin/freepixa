@@ -5,8 +5,10 @@
 	import { Button } from '../ui/button';
 	import ThemeToggler from './themeToggler.svelte';
 	import { animate } from 'motion';
+	import Spinner from '../svg/SvgSpinners180Ring.svelte';
 
 	let clicked: boolean = false;
+	let loading: boolean = false;
 	let inputElement: HTMLElement;
 	let searchTerm: string;
 
@@ -15,18 +17,30 @@
 		inputElement?.focus();
 	};
 
-	const handleSearch = (e: Event) => {
-		e.preventDefault();
-		goto('/search/' + searchTerm);
+	const handleSearch = async (e: Event) => {
+		e ? e.preventDefault() : null;
+		if (searchTerm) {
+			loading = true;
+			goto('/search/' + searchTerm);
+			await new Promise((res) => setTimeout(res, 500));
+			loading = false;
+			searchAnimationClose();
+			searchTerm = '';
+		} else {
+			searchAnimationClose();
+		}
 	};
 
 	const searchAnimationOpen = () => {
-		animate('.search-button', { width: '180px' }, { easing: 'ease-in-out', duration: 0.5 });
 		animate('#search-input', { opacity: [0, 1] }, { delay: 0.4 });
+		animate('.search-button', { width: '180px' }, { easing: 'ease-in-out', duration: 0.5 });
+		clicked = true;
 	};
 
 	const searchAnimationClose = () => {
+		animate('#search-input', { opacity: [1, 0] }, { delay: 0.4 });
 		animate('.search-button', { width: '2.25rem' }, { easing: 'ease-in-out', duration: 0.5 });
+		clicked = false;
 	};
 
 	onMount(() => {
@@ -39,25 +53,38 @@
 		<h1 class="heading-title text-5xl">FreePixa</h1>
 	</a>
 	<div class="flex items-center gap-3">
-		<div class="search-button flex h-9 w-9 items-center rounded-[calc(var(--radius)-2px)] border">
-			<Button
-				aria-label="Search"
-				variant="ghost"
-				size="icon"
-				class="relative -top-[1px] min-w-9"
-				on:click={async () => {
-					if (!clicked) {
-						searchAnimationOpen();
-						clicked = true;
-						focusSearch();
-					} else {
-						searchAnimationClose();
-						clicked = false;
-					}
-				}}
-			>
-				<Search class="size-5"></Search>
-			</Button>
+		<div
+			class="search-button flex h-9 w-9 items-center overflow-hidden rounded-[calc(var(--radius)-2px)] border"
+		>
+			{#if loading}
+				<Spinner class="size-5"></Spinner>
+			{:else}
+				<Button
+					aria-label="Search"
+					variant="ghost"
+					size="icon"
+					class="relative -top-[1px] min-w-9"
+					on:click={async () => {
+						if (!clicked) {
+							searchAnimationOpen();
+							focusSearch();
+						} else {
+							searchAnimationClose();
+							if (searchTerm) {
+								loading = true;
+								// @ts-ignore
+								handleSearch();
+								await new Promise((res) => setTimeout(res, 500));
+								loading = false;
+							} else {
+								return;
+							}
+						}
+					}}
+				>
+					<Search class="size-5"></Search>
+				</Button>
+			{/if}
 			<form on:submit={handleSearch}>
 				<input
 					id="search-input"
