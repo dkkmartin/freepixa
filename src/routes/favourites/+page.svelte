@@ -1,7 +1,17 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import { localFavsStore } from '$lib/stores/stores';
+	import { Image } from '@unpic/svelte';
 
-	export let data: PageData;
+	let data = $localFavsStore;
 </script>
 
-<section class=""></section>
+<section class="grid grid-cols-2 gap-2 md:grid-cols-2 lg:grid-cols-3">
+	{#each data as item}
+		<Image
+			class="object-cover"
+			layout="fullWidth"
+			src={item.urls.small}
+			alt={item.alt_description}
+		/>
+	{/each}
+</section>

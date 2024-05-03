@@ -6,6 +6,7 @@
 	import ThemeToggler from './themeToggler.svelte';
 	import { animate } from 'motion';
 	import Spinner from '../svg/SvgSpinners180Ring.svelte';
+	import SheetMenu from './sheetMenu.svelte';
 
 	let clicked: boolean = false;
 	let loading: boolean = false;
@@ -96,7 +97,7 @@
 				/>
 			</form>
 		</div>
-		<ThemeToggler></ThemeToggler>
+		<SheetMenu></SheetMenu>
 	</div>
 </header>
 
