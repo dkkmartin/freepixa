@@ -9,7 +9,6 @@
 
 	function handleClick() {
 		goto('/favourites');
-		console.log(Sheet);
 	}
 </script>
 
