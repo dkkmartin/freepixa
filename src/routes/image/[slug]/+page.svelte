@@ -23,12 +23,12 @@
 	}
 
 	// Fix types here
-	function handleLike(data: object) {
+	function handleLike(data: Result) {
 		if ($localFavsStore.includes(data)) {
 			$localFavsStore = $localFavsStore.filter((item) => item !== data);
 			return;
 		} else {
-			localFavsStore.update((currentFavs: object[]) => [...currentFavs, data]);
+			localFavsStore.update((currentFavs) => [...currentFavs, data]);
 		}
 	}
 </script>
@@ -60,7 +60,9 @@
 			</div>
 			<Image layout="fullWidth" src={data.urls.small} alt={data.alt_description} />
 			<div class="flex items-center justify-between border-b p-2">
-				<p class="text-xl text-muted-foreground">{data.description}</p>
+				<p class="text-xl text-muted-foreground">
+					{data.description ? data.description : 'No description'}
+				</p>
 				<Button on:click={() => handleLike(data)} variant="ghost" size="icon">
 					{#if $localFavsStore.includes(data)}
 						<HeartOff class="h-[1.5rem] w-[1.5rem]"></HeartOff>
