@@ -75,7 +75,9 @@
 	}
 </script>
 
-<h1 class="px-2 py-4 text-3xl">Results for: {capitalized + data.params.slice(1)}</h1>
+<h1 class="border-b px-2 py-2 text-2xl">
+	Found {data.data.response.total} results for: {capitalized + data.params.slice(1)}
+</h1>
 
 <section
 	class="flex flex-col gap-4 py-4"

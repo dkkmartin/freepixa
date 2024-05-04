@@ -12,6 +12,7 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
+		"@svelte-put/qr": "^1.2.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-netlify": "^4.2.0",
 		"@sveltejs/enhanced-img": "^0.2.0",
@@ -39,6 +40,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@formkit/auto-animate": "^0.8.2",
 		"@macfja/svelte-persistent-store": "^2.4.1",
 		"@unpic/placeholder": "^0.1.2",
 		"@unpic/svelte": "^0.0.53",
@@ -51,6 +53,7 @@
 		"motion": "^10.17.0",
 		"svelte-legos": "^0.2.2",
 		"svelte-radix": "^1.1.0",
+		"svelte-sonner": "^0.3.22",
 		"tailwind-merge": "^2.3.0",
 		"tailwind-variants": "^0.2.1",
 		"unsplash-js": "^7.0.19"
