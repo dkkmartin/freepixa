@@ -23,11 +23,11 @@
 		return date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 	}
 
-	// Fix types here
 	function handleLike(data: Result) {
-		if ($localFavsStore.includes(data)) {
+		const isFav = $localFavsStore.some((item) => item.id === data.id);
+		if (isFav) {
 			toast.success('Removed from favorites');
-			$localFavsStore = $localFavsStore.filter((item) => item !== data);
+			$localFavsStore = $localFavsStore.filter((item) => item.id !== data.id);
 			return;
 		} else {
 			toast.success('Added to favorites');
@@ -69,7 +69,7 @@
 					{data.description ? data.description : 'No description'}
 				</p>
 				<Button on:click={() => handleLike(data)} variant="ghost" size="icon">
-					{#if $localFavsStore.includes(data)}
+					{#if $localFavsStore.some((item) => item.id === data.id)}
 						<HeartOff class="h-[1.5rem] w-[1.5rem]"></HeartOff>
 					{:else}
 						<Heart class="h-[1.5rem] w-[1.5rem]"></Heart>

@@ -21,8 +21,11 @@
 
 	function handleDelete() {
 		if (!deleting) return;
-		if (markedImages.length === 0) return;
-		if (markedImages.length + 1 === $localFavsStore.length) {
+		if (markedImages.length === 0) {
+			deleting = false;
+			return;
+		}
+		if (markedImages.length === $localFavsStore.length) {
 			deleteAll();
 			toast.success('All images deleted', {
 				duration: 3000
