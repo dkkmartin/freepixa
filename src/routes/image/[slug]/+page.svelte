@@ -9,12 +9,13 @@
 	import Heart from '$lib/components/svg/MaterialSymbolsFavoriteOutline.svelte';
 	import HeartOff from '$lib/components/svg/MdiHeartOffOutline.svelte';
 	import { type Result } from '$lib/types/unsplash';
+	import { toast, Toaster } from 'svelte-sonner';
+	import { mode } from 'mode-watcher';
 
 	let data: Result;
 
 	$: {
 		data = $imageDataStore as Result;
-		console.log(data);
 	}
 
 	function formatDate(dateString: string) {
@@ -25,13 +26,17 @@
 	// Fix types here
 	function handleLike(data: Result) {
 		if ($localFavsStore.includes(data)) {
+			toast.success('Removed from favorites');
 			$localFavsStore = $localFavsStore.filter((item) => item !== data);
 			return;
 		} else {
+			toast.success('Added to favorites');
 			localFavsStore.update((currentFavs) => [...currentFavs, data]);
 		}
 	}
 </script>
+
+<Toaster visibleToasts={1} theme={$mode === 'dark' ? 'dark' : 'light'} />
 
 {#if data}
 	<article class="flex flex-col gap-4 py-4">
