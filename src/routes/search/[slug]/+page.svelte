@@ -29,6 +29,7 @@
 	}
 
 	function blurhashPlaceholder(blurhash: string) {
+		if (!blurhash) return '';
 		const placeholder = blurhashToCssGradientString(blurhash);
 		return placeholder;
 	}
@@ -59,8 +60,6 @@
 
 			const jsonData = await response.json();
 			images = [...images, ...jsonData];
-			console.log(images);
-
 			isLoading = false;
 		} catch (error) {
 			console.error('Error:', error);

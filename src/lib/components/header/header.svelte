@@ -58,7 +58,9 @@
 			class="search-button flex h-9 w-9 items-center overflow-hidden rounded-[calc(var(--radius)-2px)] border"
 		>
 			{#if loading}
-				<Spinner class="size-5"></Spinner>
+				<div class="flex w-full justify-center">
+					<Spinner class="size-5 "></Spinner>
+				</div>
 			{:else}
 				<Button
 					aria-label="Search"
