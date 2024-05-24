@@ -17,9 +17,11 @@
 </svelte:head>
 
 <ModeWatcher />
-<nav>
-	<Header></Header>
-</nav>
-<main>
-	<slot></slot>
-</main>
+<div class="mx-auto max-w-md">
+	<nav>
+		<Header></Header>
+	</nav>
+	<main>
+		<slot></slot>
+	</main>
+</div>
