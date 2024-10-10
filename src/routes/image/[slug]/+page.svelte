@@ -86,14 +86,7 @@
 		</header>
 	</article>
 
-	<section class="flex justify-between p-2">
-		<div class="flex flex-wrap gap-2">
-			{#each data.tags as tag}
-				<a href={'/search/' + tag.title}>
-					<Badge>{tag.title}</Badge>
-				</a>
-			{/each}
-		</div>
+	<section class="flex justify-end p-2">
 		<a target="_blank" rel="noopener noreferrer" aria-label="Download" href={data.urls.full}
 			><Button>Download</Button></a
 		>
